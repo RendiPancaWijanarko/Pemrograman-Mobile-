@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tugas_praktikum4/recipe_detail.dart';
+import 'recipe.dart'; // Tambahkan import untuk recipe.dart
 
 void main() {
   runApp(const RecipeApp());
@@ -22,7 +24,6 @@ class RecipeApp extends StatelessWidget {
     },
   );
 
-// This widget is the root of the application
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -40,10 +41,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyHomePage> createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +52,54 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         title: Text(widget.title),
       ),
-      body: SafeArea(child: Container()),
+      body: SafeArea(
+        child: ListView.builder(
+          itemCount: Recipe.samples.length,
+          itemBuilder: (BuildContext context, int index) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return RecipeDetail(recipe: Recipe.samples[index]);
+                    },
+                  ),
+                );
+              },
+              child: buildRecipeCard(Recipe.samples[index]),
+            );
+          },
+        ),
+      ),
     );
   }
+}
+
+Widget buildRecipeCard(Recipe recipe) {
+  return Card(
+    elevation: 2.0,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10.0),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          Image(image: AssetImage(recipe.imageUrl)),
+          const SizedBox(
+            height: 14.0,
+          ),
+          Text(
+            recipe.label,
+            style: const TextStyle(
+              fontSize: 20.8,
+              fontWeight: FontWeight.w700,
+              fontFamily: 'Palationo',
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }
