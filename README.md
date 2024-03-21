@@ -1,6 +1,7 @@
 # tugas_praktikum4
 
-A new Flutter project.
+A new Flutter project by Rendi Panca Wijanarko
+Business Inquiries please email to rendi.wijanarko03@gmail.com
 
 ## Getting Started
 
