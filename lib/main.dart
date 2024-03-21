@@ -6,7 +6,6 @@ void main() {
 
 class RecipeApp extends StatelessWidget {
   const RecipeApp({Key? key}) : super(key: key);
-
   static const MaterialColor white = MaterialColor(
     0xFFFFFFFF,
     <int, Color>{
@@ -22,4 +21,37 @@ class RecipeApp extends StatelessWidget {
       900: Color(0xFFFFFFFF)
     },
   );
+
+// This widget is the root of the application
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Recipe Calculator',
+      theme: ThemeData(
+        primarySwatch: white,
+      ),
+      home: const MyHomePage(title: 'Recipe Calculator'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(widget.title),
+      ),
+      body: SafeArea(child: Container()),
+    );
+  }
 }
